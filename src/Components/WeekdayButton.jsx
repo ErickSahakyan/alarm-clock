@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useAlarmClock from "../Hooks/useAlarmClock";
 
 const WeekdayButton = () => {
   const [valP, setValP] = useState(false);
@@ -10,32 +11,44 @@ const WeekdayButton = () => {
   const [valSU, setValSU] = useState(false);
   const [valV, setValV] = useState(false);
 
+  const {
+    setAlarmClockDate,
+    alarmClockDate,
+  } = useAlarmClock();
+
   const handleValP = () => {
     setValP(!valP);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Пн"));
   };
 
   const handlevalVT = () => {
     setValVT(!valVT);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Вт"));
   };
 
   const handlevalS = () => {
     setValS(!valS);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Ср"));
   };
 
   const handlevalCH = () => {
     setValCH(!valCH);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Чт"));
   };
 
   const handlevalPY = () => {
     setValPY(!valPY);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Пт"));
   };
 
   const handlevalSU = () => {
     setValSU(!valSU);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Сб"));
   };
 
   const handlevalV = () => {
     setValV(!valV);
+    setAlarmClockDate(alarmClockDate.selectedDays.push("Вс"));
   };
 
   return (

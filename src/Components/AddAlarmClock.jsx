@@ -1,39 +1,18 @@
 import { Button, Checkbox, Input, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import useAlarmClock from "../Hooks/useAlarmClock";
 import AddAlarmAppBar from "./AddAlarmAppBar";
 import WeekdayButton from "./WeekdayButton";
 
 const AddAlarmClock = ({ handleShow }) => {
-  const [alarmTime, setAlarmTime] = useState("");
-  const [time, setTime] = useState(new Date().toLocaleDateString());
-  const [alarmSound, setAlarmSound] = useState(null);
-  const [alarmClockDate, setAlarmClockDate] = useState([]);
-
-  const handleAlarmTimeChange = (event) => {
-    setAlarmTime(event.target.value);
-  };
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime(new Date().toLocaleTimeString());
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const handleSetAlarm = () => {
-    setAlarmClockDate({
-      time: [...alarmTime, alarmTime],
-    });
-  };
-
-  const handleResetAlarm = () => {
-    setAlarmTime("");
-    if (alarmSound) {
-      alarmSound.pause();
-      alarmSound.currentTime = 0;
-    }
-  };
+  const {
+    alarmTime,
+    handleAlarmTimeChange,
+    alarmClockName,
+    handleAlarmClockName,
+    alarmClockDate,
+    handleSetAlarm,
+  } = useAlarmClock();
 
   return (
     <div>
@@ -87,6 +66,8 @@ const AddAlarmClock = ({ handleShow }) => {
             <WeekdayButton />
           </div>
           <TextField
+            value={alarmClockName}
+            onChange={handleAlarmClockName}
             style={{
               color: "white",
               width: "100%",
