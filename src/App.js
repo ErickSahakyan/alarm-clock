@@ -1,10 +1,10 @@
-import MiniAlarmClock from "./MiniAlarmClock";
 import "./App.css";
+import AlarmClock from "./Components/AlarmClock";
 
 function App() {
   return (
     <div>
-      <MiniAlarmClock />
+      <AlarmClock />
     </div>
   );
 }

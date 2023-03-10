@@ -1,62 +1,79 @@
 import { Button } from "@mui/material";
-import { BsPlus } from "react-icons/bs";
-import  { useState } from "react";
+import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 import AddAlarmClock from "./AddAlarmClock";
+import Navbar from "./Navbar";
 
 const AlarmClock = () => {
-  const [val, setVal] = useState(false);
+  const [val, setVal] = useState(true);
 
-  const handleAddAlarmClock = () => {
-    setVal(true);
+  const handleShow = () => {
+    setVal(!val);
   };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minWidth: "50%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div>
+      <Navbar handleShow={handleShow} />
       {val ? (
-        <AddAlarmClock setVal={setVal} />
-      ) : (
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            minWidth: "50%",
             justifyContent: "center",
             alignItems: "center",
+            marginTop: "50px",
           }}
         >
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              width: "50%",
+              minHeight: "50%",
+              backgroundColor: "#474747",
             }}
           >
-            <p style={{ color: "white", fontSize: "28px" }}>Будильник</p>
-          </div>
-          <div style={{ marginLeft: "350px" }}>
-            <Button onClick={handleAddAlarmClock}>
-              <BsPlus style={{ color: "white", fontSize: "38px" }} />
-            </Button>
-          </div>
-          <div>
-            <p
+            <div
               style={{
-                color: "#ccc",
-                fontSize: "22px",
-                marginTop: "15rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "auto 0",
+                padding: "50px",
               }}
             >
-              Нет будильников
-            </p>
+              <Button
+                onClick={handleShow}
+                style={{
+                  backgroundColor: "blue",
+                  borderRadius: "250px 250px 250px",
+                  minWidth: "50px",
+                  height: "50px",
+                }}
+              >
+                <AiOutlinePlus
+                  style={{
+                    color: "white",
+                    backgroundColor: "blue",
+                    fontSize: "34px",
+                    fontWeight: "bold",
+                  }}
+                />
+              </Button>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <p style={{ color: "white" }}>
+                  Создайте новый сигнал будильника здесь
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      ) : (
+        <AddAlarmClock handleShow={handleShow} />
       )}
     </div>
   );

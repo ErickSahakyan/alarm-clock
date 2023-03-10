@@ -1,132 +1,138 @@
-import { Button, Input } from "@mui/material";
-import React, { memo, useCallback, useRef, useState } from "react";
-import { BsFillCalendarWeekFill } from "react-icons/bs";
-import { initialState, useAlarmClock } from "../Hooks/useALarmClock";
-import Calendar from "./Calendar";
-import Clock from "./Clock";
+import { Button, Checkbox, Input, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import AddAlarmAppBar from "./AddAlarmAppBar";
 import WeekdayButton from "./WeekdayButton";
 
-function AddAlarmClock({ setVal }) {
-  const [signalName, setSignalName] = useState("");
-  const [showCalendar, setShowCalendar] = useState(false);
+const AddAlarmClock = ({ handleShow }) => {
+  const [alarmTime, setAlarmTime] = useState("");
+  const [time, setTime] = useState(new Date().toLocaleDateString());
+  const [alarmSound, setAlarmSound] = useState(null);
+  const [alarmClockDate, setAlarmClockDate] = useState([]);
 
-  const currentTime = useRef(new Date());
-  const { alarmDate, setAlarmDate } = useAlarmClock();
-
-  console.log(alarmDate);
-
-  const handleCancel = () => {
-    setVal(false);
+  const handleAlarmTimeChange = (event) => {
+    setAlarmTime(event.target.value);
   };
 
-  const nextDay = useCallback(() => {
-    return new Intl.DateTimeFormat("ru-RU", options).format(
-      currentTime.current.setDate(currentTime.current.getDay() - 1)
-    );
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  const handleSave = () => {};
-
-  const alarmClockText = () => {
-    if (alarmDate.length === 0) {
-      return "Завтра - ";
-    }
-    if (alarmDate.length === 7) {
-      return "Ежедневно";
-    }
-    if (alarmDate.length > 1) {
-      return "Кажд. ";
-    }
+  const handleSetAlarm = () => {
+    setAlarmClockDate({
+      time: [...alarmTime, alarmTime],
+    });
   };
 
-  const weekdayFunc = () => {
-    if (alarmDate.length === 0) {
-      return nextDay();
-    }
-    if (alarmDate.length === 7) {
-      setAlarmDate([]);
-    }
-    if (alarmDate.length > 0) {
-      return alarmDate.map((day) => day + ", ");
+  const handleResetAlarm = () => {
+    setAlarmTime("");
+    if (alarmSound) {
+      alarmSound.pause();
+      alarmSound.currentTime = 0;
     }
   };
-
-  const handleShowCalendar = () => {
-    setShowCalendar(true);
-  };
-
-  let options = { weekday: "long" };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minWidth: "50%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {showCalendar ? (
-        <Calendar setShowCalendar={setShowCalendar} />
-      ) : (
-        <div>
-          <div>
-            <Clock />
+    <div>
+      <AddAlarmAppBar handleShow={handleShow} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            marginTop: "180px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "50%",
+            height: "50px",
+          }}
+        >
+          <div style={{ width: "100%", heigth: "50%", color: "white" }}>
+            <Button
+              style={{
+                width: "120px",
+                height: "50px",
+                color: "#474747",
+                backgroundColor: "#474747",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: "5px",
+                }}
+              >
+                <Input
+                  style={{ fontSize: "28px", color: "white" }}
+                  type="time"
+                  value={alarmTime}
+                  onChange={handleAlarmTimeChange}
+                />
+              </div>{" "}
+            </Button>
+          </div>
+          <div style={{ width: "100%", heigth: "50%" }}>
+            <WeekdayButton />
+          </div>
+          <TextField
+            style={{
+              color: "white",
+              width: "100%",
+              height: "50px",
+              backgroundColor: "#474747",
+              marginTop: "20px",
+            }}
+            id="filled-basic"
+            label="Сообщение"
+            variant="filled"
+          />
+          <div style={{ width: "100%", marginTop: "5px" }}>
+            <Typography
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "28px",
+                marginRight: "15px",
+              }}
+            >
+              Сигнал тревоги
+              <Checkbox
+                defaultChecked
+                sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+              />
+            </Typography>
           </div>
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              marginTop: "20px",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p style={{ color: "white" }}>
-                {alarmClockText()}
-                {weekdayFunc()}
-              </p>
-              <Button onClick={handleShowCalendar}>
-                <BsFillCalendarWeekFill
-                  style={{ color: "white", fontSize: "20px" }}
-                />
-              </Button>
-            </div>
-            <div style={{ color: "white" }}>
-              <WeekdayButton />
-            </div>
-            <div style={{ marginTop: "20px" }}>
-              <Input
-                placeholder="Имя сигнала"
-                style={{
-                  color: "white",
-                  width: "100%",
-                  height: "50px",
-                  fontSize: "16px",
-                }}
-                value={signalName}
-                onChange={(e) => setSignalName(e.target.value)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                marginTop: "20px",
-              }}
+            <Button
+              style={{ marginTop: "10px" }}
+              onClick={handleSetAlarm}
+              variant="contained"
             >
-              <Button style={{ color: "white" }} onClick={handleCancel}>
-                Отмена
-              </Button>
-              <Button style={{ color: "white" }} onClick={handleSave}>
-                Сохранить
-              </Button>
-            </div>
+              СОХРАНИТЬ
+            </Button>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
-}
+};
 
 export default AddAlarmClock;

@@ -33,7 +33,7 @@ const MiniAlarmClock = () => {
 
   useEffect(() => {
     if (alarmTime && time === alarmTime && alarmSet) {
-      const sound = new Audio("path/to/alarm/sound.mp3");
+      const sound = new Audio("/home/varuj/Downloads/sound.mp3");
       sound.play();
       setAlarmSound(sound);
     }
