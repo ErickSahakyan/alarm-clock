@@ -60,7 +60,7 @@ export default function useAlarmClock() {
       alarmDate.setMinutes(parseInt(minutes));
       alarmDate.setSeconds(0);
       const timeoutID = setTimeout(() => {
-        play()
+        play();
       }, alarmDate - new Date());
       return () => clearTimeout(timeoutID);
     }
@@ -118,7 +118,6 @@ export default function useAlarmClock() {
     alarmClockName,
     handleAlarmClockName,
     handleSetAlarm,
-    alarmClockName,
     alarmClockDate,
     handleValP,
     handlevalVT,
@@ -139,20 +138,3 @@ export default function useAlarmClock() {
     handleAlarmOff,
   };
 }
-
-// function App() {
-//   const [time, setTime] = useState(new Date().toLocaleTimeString());
-//   const [alarmTime, setAlarmTime] = useState('');
-
-//   return (
-//     <div>
-//       <h1>{time}</h1>
-//       <label>
-//         Alarm Time:
-//         <input type="time" value={alarmTime} onChange={handleAlarmTimeChange} />
-//       </label>
-//       <button onClick={handleAlarmOn}>Set Alarm</button>
-//       {alarmOn && <button onClick={handleAlarmOff}>Turn Off Alarm</button>}
-//     </div>
-//   );
-// }
