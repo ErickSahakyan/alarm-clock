@@ -1,56 +1,24 @@
 import { Button } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import useAlarmClock from "../Hooks/useAlarmClock";
 
-const WeekdayButton = () => {
-  const [valP, setValP] = useState(false);
-  const [valVT, setValVT] = useState(false);
-  const [valS, setValS] = useState(false);
-  const [valCH, setValCH] = useState(false);
-  const [valPY, setValPY] = useState(false);
-  const [valSU, setValSU] = useState(false);
-  const [valV, setValV] = useState(false);
-
-  const {
-    setAlarmClockDate,
-    alarmClockDate,
-  } = useAlarmClock();
-
-  const handleValP = () => {
-    setValP(!valP);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Пн"));
-  };
-
-  const handlevalVT = () => {
-    setValVT(!valVT);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Вт"));
-  };
-
-  const handlevalS = () => {
-    setValS(!valS);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Ср"));
-  };
-
-  const handlevalCH = () => {
-    setValCH(!valCH);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Чт"));
-  };
-
-  const handlevalPY = () => {
-    setValPY(!valPY);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Пт"));
-  };
-
-  const handlevalSU = () => {
-    setValSU(!valSU);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Сб"));
-  };
-
-  const handlevalV = () => {
-    setValV(!valV);
-    setAlarmClockDate(alarmClockDate.selectedDays.push("Вс"));
-  };
-
+const WeekdayButton = ({
+  handleValP,
+  handlevalVT,
+  handlevalS,
+  handlevalCH,
+  handlevalPY,
+  handlevalSU,
+  handlevalV,
+  valP,
+  valVT,
+  valS,
+  valCH,
+  valPY,
+  valSU,
+  valV,
+}) => {
+  
   return (
     <div style={{ display: "flex", gap: "25px", marginTop: "20px" }}>
       <Button

@@ -12,11 +12,25 @@ const AddAlarmClock = ({ handleShow }) => {
     handleAlarmClockName,
     alarmClockDate,
     handleSetAlarm,
+    handleValP,
+    handlevalVT,
+    handlevalS,
+    handlevalCH,
+    handlevalPY,
+    handlevalSU,
+    handlevalV,
+    valP,
+    valVT,
+    valS,
+    valCH,
+    valPY,
+    valSU,
+    valV,
   } = useAlarmClock();
 
   return (
     <div>
-      <AddAlarmAppBar handleShow={handleShow} />
+      <AddAlarmAppBar handleShow={handleShow} handleSetAlarm={handleSetAlarm} />
       <div
         style={{
           display: "flex",
@@ -63,7 +77,22 @@ const AddAlarmClock = ({ handleShow }) => {
             </Button>
           </div>
           <div style={{ width: "100%", heigth: "50%" }}>
-            <WeekdayButton />
+            <WeekdayButton
+              handleValP={handleValP}
+              handlevalVT={handlevalVT}
+              handlevalS={handlevalS}
+              handlevalCH={handlevalCH}
+              handlevalPY={handlevalPY}
+              handlevalSU={handlevalSU}
+              handlevalV={handlevalV}
+              valP={valP}
+              valVT={valVT}
+              valS={valS}
+              valCH={valCH}
+              valPY={valPY}
+              valSU={valSU}
+              valV={valV}
+            />
           </div>
           <TextField
             value={alarmClockName}
@@ -87,13 +116,7 @@ const AddAlarmClock = ({ handleShow }) => {
                 fontSize: "28px",
                 marginRight: "15px",
               }}
-            >
-              Сигнал тревоги
-              <Checkbox
-                defaultChecked
-                sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
-              />
-            </Typography>
+            ></Typography>
           </div>
           <div
             style={{
@@ -104,7 +127,10 @@ const AddAlarmClock = ({ handleShow }) => {
           >
             <Button
               style={{ marginTop: "10px" }}
-              onClick={handleSetAlarm}
+              onClick={() => {
+                handleSetAlarm();
+                handleShow();
+              }}
               variant="contained"
             >
               СОХРАНИТЬ

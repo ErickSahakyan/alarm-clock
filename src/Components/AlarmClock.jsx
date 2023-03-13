@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddAlarmClock from "./AddAlarmClock";
+import AlarmClockList from "./AlarmClockList";
 import Navbar from "./Navbar";
 
 const AlarmClock = () => {
@@ -14,6 +15,7 @@ const AlarmClock = () => {
   return (
     <div>
       <Navbar handleShow={handleShow} />
+      <AlarmClockList />
       {val ? (
         <div
           style={{
