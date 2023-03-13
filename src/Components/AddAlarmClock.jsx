@@ -1,33 +1,31 @@
-import { Button, Checkbox, Input, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Button, Input, TextField, Typography } from "@mui/material";
+import React from "react";
 import useAlarmClock from "../Hooks/useAlarmClock";
 import AddAlarmAppBar from "./AddAlarmAppBar";
 import WeekdayButton from "./WeekdayButton";
 
-const AddAlarmClock = ({ handleShow }) => {
-  const {
-    alarmTime,
-    handleAlarmTimeChange,
-    alarmClockName,
-    handleAlarmClockName,
-    alarmClockDate,
-    handleSetAlarm,
-    handleValP,
-    handlevalVT,
-    handlevalS,
-    handlevalCH,
-    handlevalPY,
-    handlevalSU,
-    handlevalV,
-    valP,
-    valVT,
-    valS,
-    valCH,
-    valPY,
-    valSU,
-    valV,
-  } = useAlarmClock();
-
+const AddAlarmClock = ({
+  handleShow,
+  alarmTime,
+  handleAlarmTimeChange,
+  alarmClockName,
+  handleAlarmClockName,
+  handleSetAlarm,
+  handleValP,
+  handlevalVT,
+  handlevalS,
+  handlevalCH,
+  handlevalPY,
+  handlevalSU,
+  handlevalV,
+  valP,
+  valVT,
+  valS,
+  valCH,
+  valPY,
+  valSU,
+  valV,
+}) => {
   return (
     <div>
       <AddAlarmAppBar handleShow={handleShow} handleSetAlarm={handleSetAlarm} />

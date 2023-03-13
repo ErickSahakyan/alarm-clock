@@ -16,8 +16,6 @@ export default function useAlarmClock() {
     setAlarmClockName(event.target.value);
   };
 
-  console.log(alarmClockDate);
-
   const handleAlarmTimeChange = (event) => {
     setAlarmTime(event.target.value);
   };
@@ -34,9 +32,9 @@ export default function useAlarmClock() {
 
   const handleSetAlarm = () => {
     setAlarmClockDate({
-      selectedTime: [alarmTime],
-      currentTime: [time],
-      alarmClockName: [alarmClockName],
+      selectedTime: alarmTime,
+      currentTime: time,
+      alarmClockName: alarmClockName,
       selectedDays: selectedDaysRef.current,
     });
   };

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import useAlarmClock from "../Hooks/useAlarmClock";
 import AddAlarmClock from "./AddAlarmClock";
 import AlarmClockList from "./AlarmClockList";
 import Navbar from "./Navbar";
@@ -12,10 +13,32 @@ const AlarmClock = () => {
     setVal(!val);
   };
 
+  const {
+    alarmTime,
+    handleAlarmTimeChange,
+    alarmClockName,
+    handleAlarmClockName,
+    alarmClockDate,
+    handleSetAlarm,
+    handleValP,
+    handlevalVT,
+    handlevalS,
+    handlevalCH,
+    handlevalPY,
+    handlevalSU,
+    handlevalV,
+    valP,
+    valVT,
+    valS,
+    valCH,
+    valPY,
+    valSU,
+    valV,
+  } = useAlarmClock();
+
   return (
     <div>
       <Navbar handleShow={handleShow} />
-      <AlarmClockList />
       {val ? (
         <div
           style={{
@@ -75,7 +98,28 @@ const AlarmClock = () => {
           </div>
         </div>
       ) : (
-        <AddAlarmClock handleShow={handleShow} />
+        <AddAlarmClock
+          handleShow={handleShow}
+          handleAlarmTimeChange={handleAlarmTimeChange}
+          handleAlarmClockName={handleAlarmClockName}
+          alarmClockName={alarmClockName}
+          handleSetAlarm={handleSetAlarm}
+          handleValP={handleValP}
+          handlevalVT={handlevalVT}
+          handlevalS={handlevalS}
+          handlevalCH={handlevalCH}
+          handlevalPY={handlevalPY}
+          handlevalSU={handlevalSU}
+          handlevalV={handlevalV}
+          valP={valP}
+          valVT={valVT}
+          valS={valS}
+          valCH={valCH}
+          valPY={valPY}
+          valSU={valSU}
+          valV={valV}
+          alarmTime={alarmTime}
+        />
       )}
     </div>
   );
