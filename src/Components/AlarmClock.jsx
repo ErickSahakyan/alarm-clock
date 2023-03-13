@@ -39,6 +39,7 @@ const AlarmClock = () => {
   return (
     <div>
       <Navbar handleShow={handleShow} />
+      <AlarmClockList />
       {val ? (
         <div
           style={{
