@@ -54,7 +54,7 @@ const AlarmClock = () => {
             marginTop: "50px",
           }}
         >
-          {alarmClockDate?.selectedTime  ? (
+          {alarmClockDate && alarmClockDate ? (
             <AlarmClockList
               handleBoolVal={handleBoolVal}
               handleDeleteAlarmClock={handleDeleteAlarmClock}
