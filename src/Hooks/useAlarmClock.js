@@ -21,14 +21,7 @@ export default function useAlarmClock() {
 	};
 
 	const handleDeleteAlarmClock = () => {
-		setAlarmClockDate([
-			{
-				selectedTime: [],
-				currentTime: [],
-				alarmClockName: [],
-				selectedDays: []
-			},
-		]);
+		setAlarmClockDate([]);
 	};
 
 	useEffect(() => {
@@ -44,9 +37,9 @@ export default function useAlarmClock() {
 	const handleSetAlarm = () => {
 		setAlarmClockDate([
 			{
-				selectedTime: [...alarmTime, alarmTime],
-				currentTime: [...time],
-				alarmClockName: [...alarmClockName, alarmClockName],
+				selectedTime: [alarmTime],
+				currentTime: [time],
+				alarmClockName: [alarmClockName],
 				selectedDays: [selectedDaysRef.current]
 			},
 		]);
@@ -71,7 +64,7 @@ export default function useAlarmClock() {
 			alarmDate.setMinutes(parseInt(minutes));
 			alarmDate.setSeconds(0);
 			const timeoutID = setTimeout(() => {
-				// play();
+				play();
 			}, alarmDate - new Date());
 			return () => clearTimeout(timeoutID);
 		}

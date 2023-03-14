@@ -10,10 +10,18 @@ const AlarmClockList = ({
 	bool,
 	handleShow,
 }) => {
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
 			{alarmClockDate.map((val, i) => (
-				<AlarmClockCard val={val} i={i} bool={bool} handleDeleteAlarmClock={handleDeleteAlarmClock} handleShow={handleShow} handleBoolVal={handleBoolVal} />
+				<AlarmClockCard
+					val={val}
+					i={i}
+					bool={bool}
+					handleDeleteAlarmClock={handleDeleteAlarmClock}
+					handleShow={handleShow}
+					handleBoolVal={handleBoolVal}
+				/>
 			))}
 		</div>
 	);

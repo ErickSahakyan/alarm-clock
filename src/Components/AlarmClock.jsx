@@ -42,7 +42,6 @@ const AlarmClock = () => {
 		handleDeleteAlarmClock,
 	} = useAlarmClock();
 
-	console.log(alarmClockDate);
 
 	return (
 		<div>
@@ -56,7 +55,7 @@ const AlarmClock = () => {
 						marginTop: "50px",
 					}}
 				>
-					{alarmClockDate.length !== 0 ? (
+					{alarmClockDate?.length !== 0 ? (
 						<AlarmClockList
 							handleBoolVal={handleBoolVal}
 							handleDeleteAlarmClock={handleDeleteAlarmClock}
