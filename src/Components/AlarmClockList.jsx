@@ -1,35 +1,22 @@
-import { Box, Card, CardContent, Icon, Typography } from "@mui/material";
+
 import React from "react";
-import { GiUbisoftSun } from "react-icons/gi";
+
+import AlarmClockCard from "./AlarmClockCard";
 
 const AlarmClockList = ({
-  handleBoolVal,
-  handleDeleteAlarmClock,
-  alarmClockDate,
-  bool,
-  handleShow,
+	handleBoolVal,
+	handleDeleteAlarmClock,
+	alarmClockDate,
+	bool,
+	handleShow,
 }) => {
-  return (
-    <Card>
-      <Box>
-        {alarmClockDate.map((val, i) => (
-          <CardContent>
-            <Icon>
-              <GiUbisoftSun
-                style={{
-                  color: "yellow",
-                  fontSize: "48px",
-                  marginLeft: "5px",
-                  marginRight: "5px",
-                }}
-              />
-            </Icon>
-            <Typography>{val.alarmClockName}</Typography>
-          </CardContent>
-        ))}
-      </Box>
-    </Card>
-  );
+	return (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+			{alarmClockDate.map((val, i) => (
+				<AlarmClockCard val={val} i={i} bool={bool} handleDeleteAlarmClock={handleDeleteAlarmClock} handleShow={handleShow} handleBoolVal={handleBoolVal} />
+			))}
+		</div>
+	);
 };
 
 export default AlarmClockList;

@@ -3,146 +3,150 @@ import useSound from "use-sound";
 import sound from "../sound/sound.mp3";
 
 export default function useAlarmClock() {
-  const [alarmTime, setAlarmTime] = useState("");
-  const [time, setTime] = useState(new Date().toLocaleDateString());
+	const [alarmTime, setAlarmTime] = useState("");
+	const [time, setTime] = useState(new Date().toLocaleDateString());
 
-  const [alarmClockName, setAlarmClockName] = useState("");
+	const [alarmClockName, setAlarmClockName] = useState("");
 
-  const [alarmClockDate, setAlarmClockDate] = useState([]);
+	const [alarmClockDate, setAlarmClockDate] = useState([]);
 
-  const [alarmOn, setAlarmOn] = useState(true);
+	const [alarmOn, setAlarmOn] = useState(true);
 
-  const handleAlarmClockName = (event) => {
-    setAlarmClockName(event.target.value);
-  };
+	const handleAlarmClockName = (event) => {
+		setAlarmClockName(event.target.value);
+	};
 
-  const handleAlarmTimeChange = (event) => {
-    setAlarmTime(event.target.value);
-  };
+	const handleAlarmTimeChange = (event) => {
+		setAlarmTime(event.target.value);
+	};
 
-  const handleDeleteAlarmClock = () => {
-    setAlarmClockDate([
-      { selectedTime: [] },
-      { currentTime: [] },
-      { alarmClockName: [] },
-      { selectedDays: [] },
-    ]);
-  };
+	const handleDeleteAlarmClock = () => {
+		setAlarmClockDate([
+			{
+				selectedTime: [],
+				currentTime: [],
+				alarmClockName: [],
+				selectedDays: []
+			},
+		]);
+	};
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime(new Date().toLocaleTimeString());
-    }, 1000);
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setTime(new Date().toLocaleTimeString());
+		}, 1000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+		return () => clearInterval(intervalId);
+	}, []);
 
-  const [play, { stop }] = useSound(sound);
+	const [play, { stop }] = useSound(sound);
 
-  const handleSetAlarm = () => {
-    setAlarmClockDate([
-      {selectedTime: [alarmTime]},
-      {currentTime: [time]},
-      {alarmClockName: [alarmClockName]},
-      {selectedDays: [selectedDaysRef.current]},
-    ]);
-  };
+	const handleSetAlarm = () => {
+		setAlarmClockDate([
+			{
+				selectedTime: [...alarmTime, alarmTime],
+				currentTime: [...time],
+				alarmClockName: [...alarmClockName, alarmClockName],
+				selectedDays: [selectedDaysRef.current]
+			},
+		]);
+	};
 
-  const handleAlarmOn = () => {
-    if (alarmTime) {
-      setAlarmOn(true);
-    }
-  };
+	const handleAlarmOn = () => {
+		if (alarmTime) {
+			setAlarmOn(true);
+		}
+	};
 
-  const handleAlarmOff = () => {
-    setAlarmOn(false);
-    stop();
-  };
+	const handleAlarmOff = () => {
+		setAlarmOn(false);
+		stop();
+	};
 
-  useEffect(() => {
-    if (alarmOn) {
-      const [hours, minutes] = alarmTime.split(":");
-      const alarmDate = new Date();
-      alarmDate.setHours(parseInt(hours));
-      alarmDate.setMinutes(parseInt(minutes));
-      alarmDate.setSeconds(0);
-      const timeoutID = setTimeout(() => {
-        play();
-      }, alarmDate - new Date());
-      return () => clearTimeout(timeoutID);
-    }
-  }, [alarmOn, alarmTime]);
+	useEffect(() => {
+		if (alarmOn) {
+			const [hours, minutes] = alarmTime.split(":");
+			const alarmDate = new Date();
+			alarmDate.setHours(parseInt(hours));
+			alarmDate.setMinutes(parseInt(minutes));
+			alarmDate.setSeconds(0);
+			const timeoutID = setTimeout(() => {
+				// play();
+			}, alarmDate - new Date());
+			return () => clearTimeout(timeoutID);
+		}
+	}, [alarmOn, alarmTime]);
 
-  //buttons functions
-  const [valP, setValP] = useState(false);
-  const [valVT, setValVT] = useState(false);
-  const [valS, setValS] = useState(false);
-  const [valCH, setValCH] = useState(false);
-  const [valPY, setValPY] = useState(false);
-  const [valSU, setValSU] = useState(false);
-  const [valV, setValV] = useState(false);
+	//buttons functions
+	const [valP, setValP] = useState(false);
+	const [valVT, setValVT] = useState(false);
+	const [valS, setValS] = useState(false);
+	const [valCH, setValCH] = useState(false);
+	const [valPY, setValPY] = useState(false);
+	const [valSU, setValSU] = useState(false);
+	const [valV, setValV] = useState(false);
 
-  const selectedDaysRef = useRef([]);
+	const selectedDaysRef = useRef([]);
 
-  const handleValP = () => {
-    setValP(!valP);
-    selectedDaysRef.current.push("Пн");
-  };
+	const handleValP = () => {
+		setValP(!valP);
+		selectedDaysRef.current.push("Пн");
+	};
 
-  const handlevalVT = () => {
-    setValVT(!valVT);
-    selectedDaysRef.current.push("Вт");
-  };
+	const handlevalVT = () => {
+		setValVT(!valVT);
+		selectedDaysRef.current.push("Вт");
+	};
 
-  const handlevalS = () => {
-    setValS(!valS);
-    selectedDaysRef.current.push("Ср");
-  };
+	const handlevalS = () => {
+		setValS(!valS);
+		selectedDaysRef.current.push("Ср");
+	};
 
-  const handlevalCH = () => {
-    setValCH(!valCH);
-    selectedDaysRef.current.push("Чт");
-  };
+	const handlevalCH = () => {
+		setValCH(!valCH);
+		selectedDaysRef.current.push("Чт");
+	};
 
-  const handlevalPY = () => {
-    setValPY(!valPY);
-    selectedDaysRef.current.push("Пт");
-  };
+	const handlevalPY = () => {
+		setValPY(!valPY);
+		selectedDaysRef.current.push("Пт");
+	};
 
-  const handlevalSU = () => {
-    setValSU(!valSU);
-    selectedDaysRef.current.push("Сб");
-  };
+	const handlevalSU = () => {
+		setValSU(!valSU);
+		selectedDaysRef.current.push("Сб");
+	};
 
-  const handlevalV = () => {
-    setValV(!valV);
-    selectedDaysRef.current.push("Вс");
-  };
+	const handlevalV = () => {
+		setValV(!valV);
+		selectedDaysRef.current.push("Вс");
+	};
 
-  return {
-    alarmTime,
-    handleAlarmTimeChange,
-    alarmClockName,
-    handleAlarmClockName,
-    handleSetAlarm,
-    alarmClockDate,
-    handleValP,
-    handlevalVT,
-    handlevalS,
-    handlevalCH,
-    handlevalPY,
-    handlevalSU,
-    handlevalV,
-    valP,
-    valVT,
-    valS,
-    valCH,
-    valPY,
-    valSU,
-    valV,
-    handleAlarmOn,
-    alarmOn,
-    handleAlarmOff,
-    handleDeleteAlarmClock,
-  };
+	return {
+		alarmTime,
+		handleAlarmTimeChange,
+		alarmClockName,
+		handleAlarmClockName,
+		handleSetAlarm,
+		alarmClockDate,
+		handleValP,
+		handlevalVT,
+		handlevalS,
+		handlevalCH,
+		handlevalPY,
+		handlevalSU,
+		handlevalV,
+		valP,
+		valVT,
+		valS,
+		valCH,
+		valPY,
+		valSU,
+		valV,
+		handleAlarmOn,
+		alarmOn,
+		handleAlarmOff,
+		handleDeleteAlarmClock,
+	};
 }
