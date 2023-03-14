@@ -20,6 +20,15 @@ export default function useAlarmClock() {
     setAlarmTime(event.target.value);
   };
 
+  const handleDeleteAlarmClock = () => {
+    setAlarmClockDate({
+      selectedTime: [],
+      currentTime: [],
+      alarmClockName: [],
+      selectedDays: [],
+    });
+  };
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(new Date().toLocaleTimeString());
@@ -32,10 +41,10 @@ export default function useAlarmClock() {
 
   const handleSetAlarm = () => {
     setAlarmClockDate({
-      selectedTime: alarmTime,
-      currentTime: time,
-      alarmClockName: alarmClockName,
-      selectedDays: selectedDaysRef.current,
+      selectedTime: [alarmTime],
+      currentTime: [time],
+      alarmClockName: [alarmClockName],
+      selectedDays: [selectedDaysRef.current],
     });
   };
 
@@ -134,5 +143,6 @@ export default function useAlarmClock() {
     handleAlarmOn,
     alarmOn,
     handleAlarmOff,
+    handleDeleteAlarmClock,
   };
 }
