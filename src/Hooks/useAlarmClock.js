@@ -8,7 +8,7 @@ export default function useAlarmClock() {
 
   const [alarmClockName, setAlarmClockName] = useState("");
 
-  const [alarmClockDate, setAlarmClockDate] = useState({});
+  const [alarmClockDate, setAlarmClockDate] = useState([]);
 
   const [alarmOn, setAlarmOn] = useState(true);
 
@@ -21,12 +21,12 @@ export default function useAlarmClock() {
   };
 
   const handleDeleteAlarmClock = () => {
-    setAlarmClockDate({
-      selectedTime: [],
-      currentTime: [],
-      alarmClockName: [],
-      selectedDays: [],
-    });
+    setAlarmClockDate([
+      { selectedTime: [] },
+      { currentTime: [] },
+      { alarmClockName: [] },
+      { selectedDays: [] },
+    ]);
   };
 
   useEffect(() => {
@@ -40,12 +40,12 @@ export default function useAlarmClock() {
   const [play, { stop }] = useSound(sound);
 
   const handleSetAlarm = () => {
-    setAlarmClockDate({
-      selectedTime: [alarmTime],
-      currentTime: [time],
-      alarmClockName: [alarmClockName],
-      selectedDays: [selectedDaysRef.current],
-    });
+    setAlarmClockDate([
+      {selectedTime: [alarmTime]},
+      {currentTime: [time]},
+      {alarmClockName: [alarmClockName]},
+      {selectedDays: [selectedDaysRef.current]},
+    ]);
   };
 
   const handleAlarmOn = () => {
